@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+}
+
+/* Scan-sweep: a light bar sweeps down over the results section on reveal,
+   echoing an ATS/document scanner pass. Respects reduced-motion. */
+.scan-reveal {
+  position: relative;
+  animation: fade-in 0.4s ease-out;
+}
+
+.scan-reveal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #C6F135, transparent);
+  box-shadow: 0 0 12px 2px rgba(198, 241, 53, 0.6);
+  animation: scan-down 0.9s ease-out forwards;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@keyframes scan-down {
+  0% { top: 0; opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.scan-sweep-mini {
+  width: 100%;
+  max-width: 140px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #C6F135, transparent);
+  animation: sweep-x 1.1s ease-in-out infinite;
+}
+
+@keyframes sweep-x {
+  0% { transform: translateX(-60%); opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { transform: translateX(60%); opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-reveal::before,
+  .scan-sweep-mini {
+    animation: none;
+  }
+}
