@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,11 +29,9 @@ app.include_router(analyze.router)
 app.include_router(parse.router)
 app.include_router(suggest.router)
 
-
 @app.get("/")
 def root():
     return {"status": "ok", "service": "AI Career Intelligence Platform API"}
-
 
 @app.get("/api/health")
 def health():
